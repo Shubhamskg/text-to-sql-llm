@@ -18,14 +18,14 @@ db_filepath = '../data/raw/spider/database/'
 vectordb = Chroma(persist_directory=persist_dir, embedding_function=embeddings)
 
 #get api key
-load_dotenv()
-hf_api_token = os.getenv('hf_token')
+# load_dotenv()
+# hf_api_token = os.getenv('hf_token')
 
 #add path to HF repo
 repo_id = 'google/flan-t5-xxl' #using the google flan-t5-xxl model
 
 #establish llm model
-llm = HuggingFaceHub(repo_id=repo_id, huggingfacehub_api_token=hf_api_token, model_kwargs={"temperature": 0.1, "max_length": 256})
+llm = HuggingFaceHub(repo_id=repo_id, model_kwargs={"temperature": 0.1, "max_length": 256})
 
 #define application - I want to use the imported funciton, but also loop through each of the top likely schemas. This will slow it down, but allow for testing multiple options.
 #this may not be feasible in a final model that could potentially call to a paid LLM. But we can potentially build out a better entity extraction step later on.
